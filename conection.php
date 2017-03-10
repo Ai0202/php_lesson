@@ -11,3 +11,12 @@ function connectPdo() {
     exit;
   }
 }
+
+//作成処理
+function insertDb($data) {
+  $dbh = connectPdo();
+  $sql = 'INSERT INTO todos (todo) VALUES (:todo)';
+  $stmt = $dbh->prepare($sql);
+  $stmt->bindParam(':todo', $data, PDO::PARAM_STR);
+  $stmt->execute();
+}
